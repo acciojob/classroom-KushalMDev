@@ -51,11 +51,20 @@ public class StudentRepository {
 	public void deleteTeacherByName(String teacher) {
 		// TODO Auto-generated method stub
 		teacherMapping.remove(teacher);
+		for(String student:teacherStudentMapping.get(teacher)){
+			studentMapping.remove(student);
+		}
 		teacherStudentMapping.remove(teacher);
 	}
 	public void deleteAllTeachers() {
 		// TODO Auto-generated method stub
 		teacherMapping.clear();
+		for(String teacher:teacherStudentMapping.keySet()){
+			List<String> li=teacherStudentMapping.get(teacher);
+			for(String str:li){
+				studentMapping.remove(str);
+			}
+		}
 		teacherStudentMapping.clear();
 	}
 	
